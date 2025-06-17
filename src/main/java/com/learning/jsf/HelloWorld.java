@@ -1,5 +1,8 @@
 package com.learning.jsf;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import javax.inject.Named;
 
 @Named
@@ -15,7 +18,9 @@ public class HelloWorld {
     }
 
     public String showGreeting() {
-        return "Hello " + firstName + " " + lastName + "!";
+        Authentication authentication = SecurityContextHolder
+                .getContext().getAuthentication();
+        return "Hello " + authentication.getName() + "!";
     }
 
     public String getFirstName() {
